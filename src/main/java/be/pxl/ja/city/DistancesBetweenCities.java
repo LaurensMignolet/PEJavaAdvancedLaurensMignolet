@@ -28,8 +28,6 @@ public class DistancesBetweenCities {
 
 		City closest = DistanceUtil.findClosest(cities, hasselt);
 		System.out.println(String.format("de stad %s ligt het dichtst bij %s", closest.toString(), hasselt.toString()));
-
-
 	}
 
 }

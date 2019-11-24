@@ -24,4 +24,13 @@ public class RGBPixel implements PixelToInt {
         return "(" + red + ", " + green + ", " + blue + ")";
     }
 
+   public void convertToGreyScale(){
+   //public RGBPixel convertToGreyScale(){
+        //todo vragen of dit met een stream MOET.?  simpel goed?
+        int average = (red+green+blue)/3;
+        red = average;
+        blue = average;
+        green = average;
+        //return this;
+    }
 }
