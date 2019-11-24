@@ -22,9 +22,6 @@ public class CityTest {
         Assertions.assertEquals(72.75, distance);
         Assertions.assertEquals(96.71, leuven.distance(roermond));
         Assertions.assertEquals(28.84, maastricht.distance(aken));
-
-
-
     }
 
     @Test
