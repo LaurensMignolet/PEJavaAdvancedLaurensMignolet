@@ -1,5 +1,5 @@
 package be.pxl.ja.common;
 
-public abstract class DistanceFunction<T> {
-    abstract double distance(T param);
+public abstract interface DistanceFunction<T> {
+    public abstract double distance(T param);
 }
