@@ -36,7 +36,8 @@ public class ImageArt {
 
         try {
 
-            /*hier zet ik de rgbpixellijst om naar een grayscalepixellijst met behulp van streams
+            /*hier zet ik de rgbpixellijst om naar een grayscalepixellijst met behulp van streams.
+            deze lijst gebruik ik daarna om de grayscale.jpg te genereren
                 dit is vraag 4a
                        */
             List<List<GrayscalePixel>> tokioGray = tokioRGB.stream().map(rgbPixels -> rgbPixels.stream().map(pixel -> pixel.convertToGreyScale()).collect(Collectors.toList())).collect(Collectors.toList());
