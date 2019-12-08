@@ -28,6 +28,8 @@ public class Main {
             tokioRGB.stream().forEach(pixels ->  pixels.stream().forEach(pixel -> pixel.convertToGreyScale()));
 
             myWriter.writeImage(p2, tokioRGB);
+
+
         }catch (IOException e){
             System.out.println(e.getMessage());
         }

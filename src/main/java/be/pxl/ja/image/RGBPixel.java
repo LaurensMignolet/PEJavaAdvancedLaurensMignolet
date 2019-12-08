@@ -1,5 +1,8 @@
 package be.pxl.ja.image;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class RGBPixel implements PixelToInt {
     private int red;
     private int green;
@@ -24,13 +27,15 @@ public class RGBPixel implements PixelToInt {
         return "(" + red + ", " + green + ", " + blue + ")";
     }
 
-   public void convertToGreyScale(){
+   public GrayscalePixel convertToGreyScale(){
    //public RGBPixel convertToGreyScale(){
         //todo vragen of dit met een stream MOET.?  simpel goed?
-        int average = (red+green+blue)/3;
-        red = average;
-        blue = average;
-        green = average;
-        //return this;
+
+
+        int average = (int)Arrays.stream(new int[] {red,green,blue}).average().orElseThrow(IllegalStateException::new);  //(red+green+blue)/3;
+        //red = average;
+        //blue = average;
+        //green = average;
+        return new GrayscalePixel(average);
     }
 }
