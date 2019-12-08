@@ -24,7 +24,7 @@ public class RGBPixel implements PixelToInt {
 
     @Override
     public String toString() {
-        return "(" + red + ", " + green + ", " + blue + ")";
+        return " rgbpixel: (" + red + ", " + green + ", " + blue + ")";
     }
 
    public GrayscalePixel convertToGreyScale(){

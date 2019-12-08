@@ -4,7 +4,7 @@ import be.pxl.ja.common.DistanceFunction;
 
 import java.awt.*;
 
-public class GrayscalePixel implements PixelToInt, DistanceFunction<GrayscalePixel> {
+public class GrayscalePixel implements PixelToInt, DistanceFunction<GrayscalePixel>  {
     private int greyscale;
 
     public GrayscalePixel(int greyscale) {
@@ -22,11 +22,27 @@ public class GrayscalePixel implements PixelToInt, DistanceFunction<GrayscalePix
 
     @Override
     public String toString() {
-        return Integer.toString(greyscale);
+        return "GrayScalepixel: " + Integer.toString(greyscale);
     }
 
     @Override
     public double distance(GrayscalePixel param) {
         return Math.abs(this.greyscale - param.greyscale);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GrayscalePixel that = (GrayscalePixel) o;
+
+        return getGreyscale() == that.getGreyscale();
+    }
+
+    @Override
+    public int hashCode() {
+        return getGreyscale();
     }
 }
