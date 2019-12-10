@@ -43,6 +43,7 @@ public class ImageArt {
 
             //4B
 
+            //maak treeset en vul deze
             TreeSet<GrayscalePixel> treeGray = new TreeSet<>(
                     new Comparator<GrayscalePixel>() {
                         @Override
@@ -55,38 +56,37 @@ public class ImageArt {
             tokioGray.forEach(grayscalePixels -> grayscalePixels.stream().forEach(grayscalePixel -> treeGray.add(grayscalePixel)));
 
 
-
+            //creeër de hashmap om nadien te weten elke rgb bij welke grayscale hoort
             HashMap<GrayscalePixel, RGBPixel> tranlationMap = new HashMap<>(createTranslationMap(faireyColors, treeGray));
             System.out.println(tranlationMap);
 
 
             //eerst de grayscale naar het dichtste bij omzetten
-            int[] values = new int[] {32,224,96,160};
+
             List<List<GrayscalePixel>> grayfair = new ArrayList<>();
             for(int i = 0; i < tokioGray.size(); i++){
                 grayfair.add(new ArrayList<GrayscalePixel>());
                 for(int j = 0; j < tokioGray.get(i).size(); j++){
                     int indexsmall = 0;
-                    for(int c = 0; c < values.length; c++){
-                        if(tokioGray.get(i).get(j).distance(new GrayscalePixel(values[c])) < tokioGray.get(i).get(j).distance(new GrayscalePixel(values[indexsmall]))){
+                    for(int c = 0; c < tranlationMap.keySet().size(); c++){
+                        if(tokioGray.get(i).get(j).distance((GrayscalePixel)tranlationMap.keySet().toArray()[c]) < tokioGray.get(i).get(j).distance((GrayscalePixel)tranlationMap.keySet().toArray()[indexsmall])){
                             indexsmall = c;
                         }
                     }
 
-                    grayfair.get(i).add(new GrayscalePixel(values[indexsmall]));
+                    grayfair.get(i).add((GrayscalePixel)tranlationMap.keySet().toArray()[indexsmall]);
                 }
             }
 
-            System.out.println(grayfair.get(0).get(0));
+            /*System.out.println(grayfair.get(0).get(0));
             System.out.println(tranlationMap.get(new GrayscalePixel(224)));
-
-            System.out.println(grayfair);
+            System.out.println(grayfair);¨*/
 
             //nu de dichtste bij omzetten met behulp van map
-            List<List<RGBPixel>> FaireyPic = grayfair.stream().map(grayscalePixels -> grayscalePixels.stream().map(grayscalePixel -> tranlationMap.get(grayscalePixel)).collect(Collectors.toList())).collect(Collectors.toList());
+            //List<List<RGBPixel>> FaireyPic = grayfair.stream().map(grayscalePixels -> grayscalePixels.stream().map(grayscalePixel -> tranlationMap.get(grayscalePixel)).collect(Collectors.toList())).collect(Collectors.toList());
 
             Path p3 = Paths.get("src\\main\\resources\\Fairey.jpg");
-            myWriter.writeImage(p3, FaireyPic);
+            myWriter.writeImage(p3, grayfair.stream().map(grayscalePixels -> grayscalePixels.stream().map(grayscalePixel -> tranlationMap.get(grayscalePixel)).collect(Collectors.toList())).collect(Collectors.toList()));
 
 
 
