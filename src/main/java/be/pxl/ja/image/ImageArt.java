@@ -58,7 +58,7 @@ public class ImageArt {
              * */
             grayList.forEach(grayscalePixels -> grayscalePixels.stream().forEach(grayscalePixel -> treeGray.add(grayscalePixel)));
             HashMap < GrayscalePixel, RGBPixel > tranlationMap = new HashMap < > (createTranslationMap(faireyColors, treeGray));
-            List < List < GrayscalePixel >> tranlatedGrayPixelsList = grayList.stream().map(grayscalePixels -> grayscalePixels.stream().map(grayscalePixel -> DistanceUtil.findClosest(new ArrayList < > (tranlationMap.keySet()), grayscalePixel)).collect(Collectors.toList())).collect(Collectors.toList());
+            List < List < GrayscalePixel >> tranlatedGrayPixelsList = grayList.stream().map(grayscalePixels -> grayscalePixels.stream().map(grayscalePixel -> DistanceUtil.findClosest(tranlationMap.keySet(), grayscalePixel)).collect(Collectors.toList())).collect(Collectors.toList());
             myWriter.writeImage(faireyPath, tranlatedGrayPixelsList.stream().map(grayscalePixels -> grayscalePixels.stream().map(grayscalePixel -> tranlationMap.get(grayscalePixel)).collect(Collectors.toList())).collect(Collectors.toList()));
 
             lod.stop();

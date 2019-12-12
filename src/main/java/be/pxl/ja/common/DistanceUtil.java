@@ -1,15 +1,20 @@
 package be.pxl.ja.common;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class DistanceUtil {
-    public static<T extends DistanceFunction> T  findClosest(List<T> elements, T otherElement){ //set de list moet mss een set zijn!
-        T closest = elements.get(0);
-        for(T element : elements){
-            double distance = element.distance(otherElement);
+    public static<T extends DistanceFunction> T  findClosest(Set<T> elements, T otherElement){
+        Iterator iterator = elements.iterator();
+        T closest = (T) iterator.next();
+
+        while (iterator.hasNext()) {
+            T current = ((T) iterator.next());
+            double distance = current.distance(otherElement);
 
             if(distance < closest.distance(otherElement)){
-                closest = element;
+                closest = current;
             }
         }
         return closest;

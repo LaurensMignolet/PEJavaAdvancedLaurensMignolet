@@ -3,6 +3,9 @@ package be.pxl.ja.city;
 import be.pxl.ja.common.DistanceUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class DistancesBetweenCities {
 
@@ -12,13 +15,11 @@ public class DistancesBetweenCities {
 		City maastricht = new City("Maastricht", 50.84833, 5.68889);
 		City aken = new City("Aken", 50.77664, 6.08342);
 
-		ArrayList<City> cities = new ArrayList<>();
+		Set<City> cities = new TreeSet<>();
 		cities.add(leuven);
 		cities.add(maastricht);
 		cities.add(roermond);
 		cities.add(aken);
-
-		cities.sort(City::compareTo);
 
 		for(City city: cities){
 			System.out.println(city.toString());
