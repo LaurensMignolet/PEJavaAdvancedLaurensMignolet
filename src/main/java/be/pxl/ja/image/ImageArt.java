@@ -1,5 +1,7 @@
 package be.pxl.ja.image;
 
+import be.pxl.ja.common.DistanceUtil;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -48,7 +50,7 @@ public class ImageArt {
                     new Comparator<GrayscalePixel>() {
                         @Override
                         public int compare(GrayscalePixel o1, GrayscalePixel o2) {
-                            return o1.getGreyscale() - o2.getGreyscale();
+                            return o1.getGreyscale() - o2.getGreyscale(); //(int)o1.distance(o2);
                         }
                     }
 
@@ -63,8 +65,10 @@ public class ImageArt {
 
             //eerst de grayscale naar het dichtste bij omzetten
 
-            List<List<GrayscalePixel>> grayfair = new ArrayList<>();
-            for(int i = 0; i < tokioGray.size(); i++){
+
+
+            //List<List<GrayscalePixel>> grayfair = new ArrayList<>(); //!! findclosest
+          /**  for(int i = 0; i < tokioGray.size(); i++){
                 grayfair.add(new ArrayList<GrayscalePixel>());
                 for(int j = 0; j < tokioGray.get(i).size(); j++){
                     int indexsmall = 0;
@@ -76,8 +80,15 @@ public class ImageArt {
 
                     grayfair.get(i).add((GrayscalePixel)tranlationMap.keySet().toArray()[indexsmall]);
                 }
-            }
+            } **/
+            //List<GrayscalePixel> keys = new ArrayList<>(tranlationMap.keySet());
+            //System.out.println(keys);
 
+            //zet gewone grayscale om naar de grayscale waar hij het dichtste bij is volgens de hashset
+            List<List<GrayscalePixel>> grayfair =  tokioGray.stream().map(grayscalePixels -> grayscalePixels.stream().map(grayscalePixel -> DistanceUtil.findClosest(new ArrayList<>(tranlationMap.keySet()), grayscalePixel)).collect(Collectors.toList())).collect(Collectors.toList());
+            //System.out.println(grayfair);
+
+            //List<List<GrayscalePixel>> grayPixelFair = tokioGray.stream().map(grayscalePixels -> grayscalePixels.stream().forEach(grayscalePixel -> tranlationMap.keySet().forEach( ????? )))
             /*System.out.println(grayfair.get(0).get(0));
             System.out.println(tranlationMap.get(new GrayscalePixel(224)));
             System.out.println(grayfair);¨*/
